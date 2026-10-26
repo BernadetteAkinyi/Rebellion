@@ -3,164 +3,637 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Home - Rebellion</title>
+        <meta name="description" content="Rebellion - Independent Game Tech & Modern Software Architecture" />
+        <meta name="author" content="Rebellion Editorial" />
+        <title>Home - Rebellion | Indie Games is the New Tech</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <!-- Custom modern dark theme-->
+        <link href="css/custom.css" rel="stylesheet" />
+        <!-- Bootstrap Icons CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg bg-orange">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top py-3">
             <div class="container">
-                <a class="navbar-brand" href="#!">Rebellion</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <a class="navbar-brand" href="#!">
+                    <span class="brand-icon"><i class="bi bi-controller"></i></span>
+                    <span>REBELLION</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">The Future</a></li>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-1">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#manifestoModal" data-bs-toggle="modal">Manifesto</a></li>
+                        <li class="nav-item"><a class="nav-link category-filter-link" data-category="Game Tech" href="#">Game Tech</a></li>
+                        <li class="nav-item"><a class="nav-link category-filter-link" data-category="Emergent AI" href="#">Emergent AI</a></li>
+                        <li class="nav-item"><a class="nav-link category-filter-link" data-category="Rust & WASM" href="#">Rust & WASM</a></li>
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <a class="btn btn-orange text-white" href="#dispatch-widget">
+                                <i class="bi bi-send-fill me-1"></i> Subscribe
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
         <!-- Page header with logo and tagline-->
-        <header class="py-5 bg-light border-bottom mb-4">
-            <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder">Indie is the Future</h1>
-                    <p class="lead mb-0">The Future of Tech Lies in the Hands of Indie Games</p>
+        <header class="py-5 blog-header text-center">
+            <div class="container position-relative">
+                <div class="my-4 my-md-5">
+                    <div class="blog-badge">
+                        <span class="blog-badge-pulse"></span>
+                        DISPATCH #42 &bull; THE INDIE RENAISSANCE
+                    </div>
+                    <h1 class="display-4 fw-bolder gradient-title mb-3">Indie is the Future</h1>
+                    <p class="lead text-white-50 mx-auto" style="max-width: 680px; font-size: 1.15rem;">
+                        The Future of Tech Lies in the Hands of Indie Games &mdash; where lean engineering, custom engines, and raw creative autonomy dismantle Silicon Valley's feature bloat.
+                    </p>
+
+                    <!-- Interactive category pill filters -->
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mt-4 pt-2">
+                        <button class="filter-pill active" data-filter="all"><i class="bi bi-grid-fill me-1"></i> All Dispatches</button>
+                        <button class="filter-pill" data-filter="Game Tech"><i class="bi bi-cpu-fill me-1"></i> Game Tech</button>
+                        <button class="filter-pill" data-filter="Rust & WASM"><i class="bi bi-gear-wide-connected me-1"></i> Rust &amp; WASM</button>
+                        <button class="filter-pill" data-filter="Emergent AI"><i class="bi bi-robot me-1"></i> Emergent AI</button>
+                        <button class="filter-pill" data-filter="Engineering"><i class="bi bi-code-slash me-1"></i> Architecture</button>
+                    </div>
                 </div>
             </div>
         </header>
+
+        <!-- Anchor for filter scrolling -->
+        <div id="blog-feed-anchor"></div>
+
         <!-- Page content-->
-        <div class="container">
-            <div class="row">
+        <main class="container my-5">
+            <!-- Dynamic search results count -->
+            <div id="search-results-count" class="alert d-none mb-4 py-2 px-3 text-white border-0" style="background: rgba(232, 89, 12, 0.15); border-left: 4px solid var(--reb-orange) !important;">
+            </div>
+
+            <div class="row g-4">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                    <article class="card mb-4 featured-article-card blog-article-item" data-category="Game Tech" data-tags="indie games, new tech, featured, game engines, low-level, innovation">
+                        <div class="article-img-wrapper">
+                            <span class="category-tag-floating"><i class="bi bi-star-fill text-warning me-1"></i> Featured Article</span>
+                            <span class="reading-time-tag"><i class="bi bi-clock me-1"></i> 3 min read</span>
+                            <!-- Custom High-Tech SVG Banner -->
+                            <svg class="img-fluid" viewBox="0 0 850 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Indie Games is the New Tech Banner">
+                                <defs>
+                                    <linearGradient id="featured-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#071322" />
+                                        <stop offset="50%" stop-color="#0f223d" />
+                                        <stop offset="100%" stop-color="#142c4f" />
+                                    </linearGradient>
+                                    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#e8590c" />
+                                        <stop offset="100%" stop-color="#ff922b" />
+                                    </linearGradient>
+                                    <linearGradient id="neon-cyan" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#0dcaf0" stop-opacity="0.8" />
+                                        <stop offset="100%" stop-color="#0dcaf0" stop-opacity="0" />
+                                    </linearGradient>
+                                    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                                        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100%" height="100%" fill="url(#featured-bg)"/>
+                                <rect width="100%" height="100%" fill="url(#grid)" />
+                                
+                                <!-- Horizon Wireframe Mountain -->
+                                <path d="M 0 280 L 140 190 L 260 250 L 420 140 L 590 270 L 710 180 L 850 280 L 850 360 L 0 360 Z" fill="rgba(10, 26, 47, 0.85)" stroke="#e8590c" stroke-width="2"/>
+                                <path d="M 140 190 L 420 140 L 710 180" fill="none" stroke="#ff922b" stroke-width="1.5" stroke-dasharray="6,4"/>
+                                <path d="M 260 250 L 590 270" fill="none" stroke="#0dcaf0" stroke-width="1" stroke-dasharray="4,4"/>
+
+                                <!-- Cyber Glow Circles -->
+                                <circle cx="420" cy="140" r="8" fill="#ff6b2b" />
+                                <circle cx="420" cy="140" r="18" fill="none" stroke="#ff6b2b" stroke-width="2" opacity="0.6"/>
+                                <circle cx="140" cy="190" r="6" fill="#0dcaf0" />
+                                <circle cx="710" cy="180" r="6" fill="#ff922b" />
+
+                                <!-- Code Circuit Lines -->
+                                <path d="M 50 80 H 180 L 220 120 H 320" fill="none" stroke="rgba(232,89,12,0.4)" stroke-width="2"/>
+                                <circle cx="50" cy="80" r="4" fill="#e8590c"/>
+                                <path d="M 800 60 H 680 L 630 110 H 520" fill="none" stroke="rgba(13,202,240,0.4)" stroke-width="2"/>
+                                <circle cx="800" cy="60" r="4" fill="#0dcaf0"/>
+
+                                <!-- Center Badge Emblem -->
+                                <rect x="250" y="55" width="350" height="48" rx="24" fill="rgba(7, 19, 34, 0.85)" stroke="url(#glow-grad)" stroke-width="1.5"/>
+                                <text x="425" y="85" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="16" letter-spacing="3" text-anchor="middle">
+                                    // REBELLION ARCHITECTURE LABS //
+                                </text>
+
+                                <!-- Digital Floor Glow -->
+                                <ellipse cx="425" cy="350" rx="350" ry="40" fill="url(#neon-cyan)" opacity="0.3"/>
+                            </svg>
+                        </div>
                         <div class="card-body">
-                            <div class="small text-muted">January 1, 2023</div>
-                            <h2 class="card-title">Featured Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                            <a class="btn btn-orange" href="#!">Read more →</a>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="author-avatar">RE</div>
+                                    <div>
+                                        <div class="fw-bold text-white small">Bernadette Akinyi &bull; Rebellion Research</div>
+                                        <div class="small text-muted">October 26, 2026 &bull; Published in Architecture</div>
+                                    </div>
+                                </div>
+                                <button class="btn-bookmark" title="Bookmark article" aria-label="Bookmark article">
+                                    <i class="bi bi-bookmark"></i>
+                                </button>
+                            </div>
+
+                            <h2 class="card-title h2 fw-bold text-white mb-3">
+                                Why Indie Games is the New Tech
+                            </h2>
+
+                            <!-- Punchy, concise quote block -->
+                            <div class="quote-highlight">
+                                &ldquo;Forget bloated enterprise dashboards and venture-backed API wrappers: <strong>indie games is the new tech</strong> &mdash; the real R&amp;D frontier of modern software engineering.&rdquo;
+                            </div>
+
+                            <p class="card-text text-light">
+                                For decades, Big Tech monopolized the definition of computing innovation. But today, multi-billion dollar tech giants are paralyzed by bureaucratic technical debt and risk aversion. Meanwhile, solo developers and agile micro-studios are achieving what enterprise software abandoned: bare-metal computational efficiency, deterministic physics at 144 FPS, and zero-latency emergent intelligence.
+                            </p>
+
+                            <p class="card-text text-light">
+                                Faced with zero budget for multi-million-dollar server clusters, indie creators are forced into pure algorithmic ingenuity. They write custom software rasterizers in Rust, pioneer real-time WebGPU shaders that run on low-end phones, and build on-device neural state machines that obsolete costly cloud APIs.
+                            </p>
+
+                            <!-- Key Technical Takeaways -->
+                            <div class="tech-takeaways">
+                                <div class="fw-bold text-uppercase text-white small mb-2 d-flex align-items-center">
+                                    <i class="bi bi-lightning-charge-fill text-warning me-2"></i> Core Shifts Driving the Revolution:
+                                </div>
+                                <ul class="list-unstyled mb-0">
+                                    <li><i class="bi bi-check2-circle text-warning me-2"></i><strong>Engine Sovereignty:</strong> Bypassing bloated commercial monoliths in favor of custom Rust, Zig, and C++ micro-engines.</li>
+                                    <li><i class="bi bi-check2-circle text-warning me-2"></i><strong>Zero-Allocation Algorithms:</strong> Microsecond memory footprints that embarrass modern web stacks.</li>
+                                    <li><i class="bi bi-check2-circle text-warning me-2"></i><strong>Local Emergent AI:</strong> Highly responsive, offline behavioral agents running directly on user hardware.</li>
+                                </ul>
+                            </div>
+
+                            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4 pt-2">
+                                <div class="d-flex align-items-center gap-2">
+                                    <a class="btn btn-orange" href="#manifestoModal" data-bs-toggle="modal">
+                                        Read Full Manifesto <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                    <a class="btn btn-outline-orange" href="#shareModal" data-bs-toggle="modal">
+                                        <i class="bi bi-share me-1"></i> Share
+                                    </a>
+                                </div>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="tag-pill">#GameTech</span>
+                                    <span class="tag-pill">#Rust</span>
+                                    <span class="tag-pill">#FutureTech</span>
+                                    <span class="tag-pill">#IndieDev</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </article>
+
                     <!-- Nested row for non-featured blog posts-->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-orange" href="#!">Read more →</a>
+                    <div class="row g-4" id="articles-grid">
+                        <!-- Blog post 1 -->
+                        <div class="col-md-6 blog-article-item" data-category="Rust & WASM" data-tags="rust, procedural, generation, algorithms, zero allocation, wasm">
+                            <div class="card h-100">
+                                <div class="article-img-wrapper">
+                                    <span class="category-tag-floating">Rust &amp; WASM</span>
+                                    <span class="reading-time-tag"><i class="bi bi-clock me-1"></i> 4 min read</span>
+                                    <svg class="img-fluid" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100%" height="100%" fill="#0a1a2f"/>
+                                        <!-- Isometric Grid / Terrain -->
+                                        <path d="M 350 70 L 600 200 L 350 330 L 100 200 Z" fill="#112240" stroke="#e8590c" stroke-width="2"/>
+                                        <path d="M 350 110 L 530 200 L 350 290 L 170 200 Z" fill="#0f223d" stroke="#ff922b" stroke-width="1.5" stroke-dasharray="4,4"/>
+                                        <line x1="350" y1="70" x2="350" y2="330" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                                        <line x1="100" y1="200" x2="600" y2="200" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                                        <!-- Voxel Pillars -->
+                                        <polygon points="350,150 390,170 390,230 350,210" fill="#e8590c" opacity="0.8"/>
+                                        <polygon points="350,150 310,170 310,230 350,210" fill="#d9480f" opacity="0.8"/>
+                                        <polygon points="350,150 390,170 350,190 310,170" fill="#ff922b"/>
+                                        <!-- Code string -->
+                                        <text x="350" y="50" fill="#0dcaf0" font-family="monospace" font-size="14" text-anchor="middle">fn generate_chunk(seed: u64) -&gt; Chunk</text>
+                                    </svg>
                                 </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-orange" href="#!">Read more →</a>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="small text-muted"><i class="bi bi-calendar3 me-1"></i> Oct 24, 2026</div>
+                                        <button class="btn-bookmark" title="Bookmark" aria-label="Bookmark"><i class="bi bi-bookmark"></i></button>
+                                    </div>
+                                    <h3 class="card-title h5 fw-bold text-white">Procedural Worlds in Rust: Zero-Allocation at 144 FPS</h3>
+                                    <p class="card-text text-light small flex-grow-1">
+                                        How indie developers bypass commercial monolithic bloat to generate infinite deterministic biomes in sub-millisecond tick budgets.
+                                    </p>
+                                    <div class="mt-3 pt-2 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
+                                        <span class="tag-pill mb-0">#SystemsProgramming</span>
+                                        <a class="btn btn-sm btn-outline-orange" href="#postModal1" data-bs-toggle="modal">Read more &rarr;</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-orange" href="#!">Read more →</a>
+
+                        <!-- Blog post 2 -->
+                        <div class="col-md-6 blog-article-item" data-category="Emergent AI" data-tags="ai, neural, autonomous, npcs, offline, edge computing">
+                            <div class="card h-100">
+                                <div class="article-img-wrapper">
+                                    <span class="category-tag-floating">Emergent AI</span>
+                                    <span class="reading-time-tag"><i class="bi bi-clock me-1"></i> 3 min read</span>
+                                    <svg class="img-fluid" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100%" height="100%" fill="#0a1a2f"/>
+                                        <!-- Synapse graph -->
+                                        <circle cx="200" cy="180" r="16" fill="#112240" stroke="#0dcaf0" stroke-width="2"/>
+                                        <circle cx="350" cy="110" r="22" fill="#112240" stroke="#e8590c" stroke-width="2.5"/>
+                                        <circle cx="350" cy="250" r="18" fill="#112240" stroke="#e8590c" stroke-width="2"/>
+                                        <circle cx="500" cy="180" r="20" fill="#112240" stroke="#0dcaf0" stroke-width="2"/>
+                                        <line x1="200" y1="180" x2="350" y2="110" stroke="#ff922b" stroke-width="2"/>
+                                        <line x1="200" y1="180" x2="350" y2="250" stroke="#0dcaf0" stroke-width="1.5"/>
+                                        <line x1="350" y1="110" x2="500" y2="180" stroke="#ff922b" stroke-width="2"/>
+                                        <line x1="350" y1="250" x2="500" y2="180" stroke="#0dcaf0" stroke-width="1.5"/>
+                                        <circle cx="350" cy="110" r="8" fill="#ff6b2b"/>
+                                        <text x="350" y="320" fill="#f8fafc" font-family="'Space Grotesk', sans-serif" font-size="14" text-anchor="middle">OFFLINE BEHAVIOR TREE v4.2</text>
+                                    </svg>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="small text-muted"><i class="bi bi-calendar3 me-1"></i> Oct 21, 2026</div>
+                                        <button class="btn-bookmark" title="Bookmark" aria-label="Bookmark"><i class="bi bi-bookmark"></i></button>
+                                    </div>
+                                    <h3 class="card-title h5 fw-bold text-white">Local Emergent AI: Ditching the Cloud for Smart NPCs</h3>
+                                    <p class="card-text text-light small flex-grow-1">
+                                        Why renting remote LLM tokens is a dead end for real-time systems, and how local utility heuristics produce genuine lifelike behavior.
+                                    </p>
+                                    <div class="mt-3 pt-2 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
+                                        <span class="tag-pill mb-0">#OnDeviceAI</span>
+                                        <a class="btn btn-sm btn-outline-orange" href="#postModal2" data-bs-toggle="modal">Read more &rarr;</a>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">January 1, 2023</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                    <a class="btn btn-orange" href="#!">Read more →</a>
+                        </div>
+
+                        <!-- Blog post 3 -->
+                        <div class="col-md-6 blog-article-item" data-category="Game Tech" data-tags="performance, optimization, shaders, asset compression, math">
+                            <div class="card h-100">
+                                <div class="article-img-wrapper">
+                                    <span class="category-tag-floating">Game Tech</span>
+                                    <span class="reading-time-tag"><i class="bi bi-clock me-1"></i> 5 min read</span>
+                                    <svg class="img-fluid" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100%" height="100%" fill="#0a1a2f"/>
+                                        <!-- Chip / Optimization Diagram -->
+                                        <rect x="225" y="75" width="250" height="200" rx="16" fill="#112240" stroke="#ff922b" stroke-width="2"/>
+                                        <rect x="250" y="100" width="200" height="150" rx="8" fill="#071322" stroke="#e8590c" stroke-width="1"/>
+                                        <text x="350" y="160" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="28" text-anchor="middle">50 MB</text>
+                                        <text x="350" y="195" fill="#0dcaf0" font-family="monospace" font-size="12" text-anchor="middle">&gt; VS 200GB AAA BLOAT &lt;</text>
+                                        <!-- Pins -->
+                                        <line x1="200" y1="120" x2="225" y2="120" stroke="#ff922b" stroke-width="3"/>
+                                        <line x1="200" y1="175" x2="225" y2="175" stroke="#ff922b" stroke-width="3"/>
+                                        <line x1="200" y1="230" x2="225" y2="230" stroke="#ff922b" stroke-width="3"/>
+                                        <line x1="475" y1="120" x2="500" y2="120" stroke="#ff922b" stroke-width="3"/>
+                                        <line x1="475" y1="175" x2="500" y2="175" stroke="#ff922b" stroke-width="3"/>
+                                        <line x1="475" y1="230" x2="500" y2="230" stroke="#ff922b" stroke-width="3"/>
+                                    </svg>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="small text-muted"><i class="bi bi-calendar3 me-1"></i> Oct 18, 2026</div>
+                                        <button class="btn-bookmark" title="Bookmark" aria-label="Bookmark"><i class="bi bi-bookmark"></i></button>
+                                    </div>
+                                    <h3 class="card-title h5 fw-bold text-white">The 50MB Masterpiece vs The 200GB AAA Bloat</h3>
+                                    <p class="card-text text-light small flex-grow-1">
+                                        How indie developers use signed distance field (SDF) shaders and procedural audio to deliver rich 100-hour epics in the size of an MP3.
+                                    </p>
+                                    <div class="mt-3 pt-2 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
+                                        <span class="tag-pill mb-0">#ShaderMath</span>
+                                        <a class="btn btn-sm btn-outline-orange" href="#postModal3" data-bs-toggle="modal">Read more &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog post 4 -->
+                        <div class="col-md-6 blog-article-item" data-category="Engineering" data-tags="webgpu, browser, graphics, compute, webassembly, cross-platform">
+                            <div class="card h-100">
+                                <div class="article-img-wrapper">
+                                    <span class="category-tag-floating">Engineering</span>
+                                    <span class="reading-time-tag"><i class="bi bi-clock me-1"></i> 4 min read</span>
+                                    <svg class="img-fluid" viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="100%" height="100%" fill="#0a1a2f"/>
+                                        <!-- Wave Compute Geometry -->
+                                        <path d="M 100 240 Q 220 120 350 200 T 600 160" fill="none" stroke="#e8590c" stroke-width="3"/>
+                                        <path d="M 100 260 Q 220 140 350 220 T 600 180" fill="none" stroke="#0dcaf0" stroke-width="2" stroke-dasharray="6,4"/>
+                                        <path d="M 100 280 Q 220 160 350 240 T 600 200" fill="none" stroke="#ff922b" stroke-width="1"/>
+                                        <circle cx="350" cy="200" r="10" fill="#0dcaf0"/>
+                                        <text x="350" y="80" fill="#ffffff" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="16" letter-spacing="2" text-anchor="middle">WEBGPU COMPUTE KERNEL</text>
+                                    </svg>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="small text-muted"><i class="bi bi-calendar3 me-1"></i> Oct 15, 2026</div>
+                                        <button class="btn-bookmark" title="Bookmark" aria-label="Bookmark"><i class="bi bi-bookmark"></i></button>
+                                    </div>
+                                    <h3 class="card-title h5 fw-bold text-white">WebGPU &amp; Browser Engines: The Native App Disruption</h3>
+                                    <p class="card-text text-light small flex-grow-1">
+                                        Compiling high-performance native engines to WebAssembly brings desktop raytracing and physics directly into modern web browsers.
+                                    </p>
+                                    <div class="mt-3 pt-2 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
+                                        <span class="tag-pill mb-0">#WebGPU</span>
+                                        <a class="btn btn-sm btn-outline-orange" href="#postModal4" data-bs-toggle="modal">Read more &rarr;</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- No results empty state (hidden by default) -->
+                    <div id="no-results-state" class="card text-center py-5 my-4" style="display: none;">
+                        <div class="card-body">
+                            <i class="bi bi-search display-4 text-warning mb-3 d-block"></i>
+                            <h3 class="text-white">No dispatches match your query</h3>
+                            <p class="text-muted">Try adjusting your search terms or selecting a different category.</p>
+                            <button class="btn btn-orange mt-2" onclick="document.getElementById('reset-filters')?.click()">Clear Filters</button>
+                        </div>
+                    </div>
+
                     <!-- Pagination-->
-                    <nav aria-label="Pagination">
-                        <hr class="my-0" />
-                        <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
+                    <nav aria-label="Pagination" class="my-5">
+                        <ul class="pagination pagination-custom justify-content-center">
+                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true"><i class="bi bi-chevron-left me-1"></i> Newer</a></li>
                             <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
                             <li class="page-item"><a class="page-link" href="#!">2</a></li>
                             <li class="page-item"><a class="page-link" href="#!">3</a></li>
                             <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">8</a></li>
+                            <li class="page-item"><a class="page-link" href="#!">Older <i class="bi bi-chevron-right ms-1"></i></a></li>
                         </ul>
                     </nav>
                 </div>
+
                 <!-- Side widgets-->
-                <div class="col-lg-4">
+                <aside class="col-lg-4">
                     <!-- Search widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Search</div>
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <span><i class="bi bi-search me-2 text-warning"></i> Search Dispatches</span>
+                            <span class="badge bg-dark text-warning border border-warning border-opacity-25">Live</span>
+                        </div>
                         <div class="card-body">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                                <input class="form-control form-control-custom" id="search-input" type="text" placeholder="Search tech, rust, engines..." aria-label="Search articles" />
+                                <button class="btn btn-orange" id="button-search" type="button"><i class="bi bi-arrow-right"></i></button>
+                            </div>
+                            <div class="mt-2 text-muted small">
+                                <i class="bi bi-info-circle me-1"></i> Real-time filter across all dispatches
                             </div>
                         </div>
                     </div>
+
                     <!-- Categories widget-->
                     <div class="card mb-4">
-                        <div class="card-header">Categories</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="card-header d-flex align-items-center">
+                            <i class="bi bi-folder2-open me-2 text-warning"></i> Categories
+                        </div>
+                        <div class="card-body p-2">
+                            <a href="#" class="widget-cat-item category-filter-link" data-category="Game Tech">
+                                <span><i class="bi bi-chevron-right text-warning me-2 small"></i> Game Tech</span>
+                                <span class="widget-cat-count">14</span>
+                            </a>
+                            <a href="#" class="widget-cat-item category-filter-link" data-category="Rust & WASM">
+                                <span><i class="bi bi-chevron-right text-warning me-2 small"></i> Rust &amp; WASM</span>
+                                <span class="widget-cat-count">9</span>
+                            </a>
+                            <a href="#" class="widget-cat-item category-filter-link" data-category="Emergent AI">
+                                <span><i class="bi bi-chevron-right text-warning me-2 small"></i> Emergent AI</span>
+                                <span class="widget-cat-count">7</span>
+                            </a>
+                            <a href="#" class="widget-cat-item category-filter-link" data-category="Engineering">
+                                <span><i class="bi bi-chevron-right text-warning me-2 small"></i> Low-Level Architecture</span>
+                                <span class="widget-cat-count">11</span>
+                            </a>
+                            <a href="#" class="widget-cat-item category-filter-link" data-category="all">
+                                <span><i class="bi bi-chevron-right text-warning me-2 small"></i> View All Articles</span>
+                                <span class="widget-cat-count">41</span>
+                            </a>
                         </div>
                     </div>
-                    <!-- Side widget-->
+
+                    <!-- Newsletter / Dispatch widget-->
+                    <div class="card mb-4" id="dispatch-widget">
+                        <div class="card-header d-flex align-items-center">
+                            <i class="bi bi-broadcast me-2 text-warning"></i> The Rebellion Dispatch
+                        </div>
+                        <div class="card-body">
+                            <p class="small text-light mb-3">
+                                Join 24,000+ developers receiving weekly teardowns on indie game tech, zero-overhead systems, and computing breakthroughs.
+                            </p>
+                            <form id="subscribe-form">
+                                <div class="mb-2">
+                                    <input type="email" id="subscribe-email" class="form-control form-control-custom w-100" placeholder="engineer@domain.com" required />
+                                </div>
+                                <button type="submit" class="btn btn-orange w-100 justify-content-center">
+                                    <i class="bi bi-envelope-paper-fill me-1"></i> Get Weekly Dispatch
+                                </button>
+                                <div class="text-muted mt-2 text-center" style="font-size: 0.75rem;">
+                                    Zero spam. Pure signal. Unsubscribe anytime.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Side widget: Manifesto spotlight-->
                     <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                        <div class="card-header d-flex align-items-center">
+                            <i class="bi bi-terminal me-2 text-warning"></i> Manifesto Spotlight
+                        </div>
+                        <div class="card-body">
+                            <div class="font-monospace small text-warning mb-2">// MISSION_STATEMENT</div>
+                            <p class="small text-light mb-2">
+                                We celebrate the solo programmers, shader wizards, and micro-studios proving that <strong>indie games is the new tech</strong>. No bloat. Pure craftsmanship.
+                            </p>
+                            <a href="#manifestoModal" data-bs-toggle="modal" class="text-warning text-decoration-underline small">
+                                Read our full engineering charter &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <!-- Manifesto Modal (Reader View for Main Post) -->
+        <div class="modal fade" id="manifestoModal" tabindex="-1" aria-labelledby="manifestoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header modal-header-custom">
+                        <div>
+                            <span class="badge bg-warning text-dark mb-2">REBELLION MANIFESTO</span>
+                            <h3 class="modal-title h4 text-white fw-bold" id="manifestoModalLabel">
+                                Indie Games is the New Tech: Why Tomorrow's Computing Vanguard Is Independent
+                            </h3>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4 text-light">
+                        <div class="quote-highlight my-2">
+                            &ldquo;Indie games is the new tech. The next computational renaissance won't come from a boardroom in Mountain View; it is being forged right now in bedroom code editors and itch.io prototypes.&rdquo;
+                        </div>
+                        <p class="mt-3">
+                            Over the last decade, Big Tech has traded daring architectural exploration for predictable recurring revenue. The software industry is drowning in heavy frameworks, recursive cloud bills, and thousands of lines of boilerplate just to render simple text.
+                        </p>
+                        <h5 class="text-white fw-bold mt-4 mb-2"><i class="bi bi-cpu-fill text-warning me-2"></i> The Constraint of the Solo Architect</h5>
+                        <p>
+                            Indie game developers don't have $200 million budgets or massive data centers. When an indie creator wants to render a billion blades of grass, simulate oceanic currents, or run hundreds of intelligent entities, they cannot brute-force the problem. They are forced to master data-oriented design (DOD), SIMD vectorization, cache coherence, and raw mathematical shortcuts.
+                        </p>
+                        <h5 class="text-white fw-bold mt-4 mb-2"><i class="bi bi-boxes text-warning me-2"></i> Beyond the Monopolies</h5>
+                        <p>
+                            When commercial engines raised fees and imposed arbitrary terms, the indie world didn't capitulate: they built their own tech stacks in Rust, Zig, and Odin. They built lightweight software rasterizers, custom WebGPU pipelines, and localized emergent behavior engines.
+                        </p>
+                        <p class="mb-0">
+                            The garage spirit of computing didn't disappear. It simply moved to indie game development. <strong>Indie games is the new tech.</strong>
+                        </p>
+                    </div>
+                    <div class="modal-footer modal-footer-custom d-flex justify-content-between">
+                        <span class="text-muted small">Rebellion Editorial &bull; Published Oct 2026</span>
+                        <button type="button" class="btn btn-orange" data-bs-dismiss="modal">Close Reader</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Secondary Modals for Sub-articles -->
+        <div class="modal fade" id="postModal1" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header modal-header-custom">
+                        <h4 class="modal-title text-white h5">Procedural Worlds in Rust</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4 text-light">
+                        <p>By leveraging Rust's ownership model and strict memory safety without garbage collection, modern indie engines generate seed-deterministic terrain chunks in under 0.4 milliseconds.</p>
+                        <p class="mb-0">This enables buttery-smooth 144 FPS frame pacing with zero memory allocation during runtime loops.</p>
+                    </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <button type="button" class="btn btn-orange" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="postModal2" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header modal-header-custom">
+                        <h4 class="modal-title text-white h5">Local Emergent AI</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4 text-light">
+                        <p>Cloud LLM latency destroys immersion. Indie creators are pioneering local hierarchical task networks (HTNs) and utility systems that run in microsecond cycles right on the player's CPU.</p>
+                        <p class="mb-0">Autonomous agents negotiate, learn, and adapt without an active internet connection.</p>
+                    </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <button type="button" class="btn btn-orange" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="postModal3" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header modal-header-custom">
+                        <h4 class="modal-title text-white h5">The 50MB Masterpiece</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4 text-light">
+                        <p>Modern games often exceed 150 GB due to uncompressed textures and duplicated audio tracks. Indie games utilize algorithmic shader functions, raymarched distance fields, and modular synthesis to fit breathtaking experiences into less than 50 megabytes.</p>
+                    </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <button type="button" class="btn btn-orange" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="postModal4" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header modal-header-custom">
+                        <h4 class="modal-title text-white h5">WebGPU &amp; Browser Engines</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4 text-light">
+                        <p>WebGPU provides a direct, low-overhead interface to modern GPU compute and graphics pipelines across Windows, macOS, Linux, and Android. Compiling C++ or Rust to WebAssembly allows instant, zero-install distribution with native desktop performance.</p>
+                    </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <button type="button" class="btn btn-orange" data-bs-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content modal-content-custom">
+                    <div class="modal-header modal-header-custom">
+                        <h4 class="modal-title text-white h5"><i class="bi bi-share text-warning me-2"></i> Share Dispatch</h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4 text-light text-center">
+                        <p>Spread the word that <strong>indie games is the new tech</strong>.</p>
+                        <div class="d-flex justify-content-center gap-2 my-3">
+                            <button class="btn btn-outline-orange" onclick="navigator.clipboard?.writeText(window.location.href); alert('Article link copied to clipboard!');"><i class="bi bi-link-45deg me-1"></i> Copy Link</button>
+                            <a class="btn btn-orange" href="https://twitter.com/intent/tweet?text=Indie%20games%20is%20the%20new%20tech.%20Check%20out%20Rebellion!" target="_blank"><i class="bi bi-twitter-x me-1"></i> Post</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Notification Toast -->
+        <div id="tech-toast" class="tech-toast" role="alert" aria-live="polite">
+            <i class="bi bi-check-circle-fill text-warning fs-5"></i>
+            <span id="toast-message">Notification message</span>
+        </div>
+
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        <footer class="py-5 footer-custom">
+            <div class="container">
+                <div class="row align-items-center gy-3">
+                    <div class="col-md-6 text-center text-md-start">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-2 mb-2">
+                            <span class="brand-icon" style="width: 24px; height: 24px; font-size: 0.75rem;"><i class="bi bi-controller"></i></span>
+                            <span class="text-white fw-bold">REBELLION</span>
+                        </div>
+                        <p class="m-0 text-white-50 small">
+                            Copyright &copy; Rebellion 2026. Empowering independent developers, low-level hackers, and digital artisans worldwide.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="d-flex justify-content-center justify-content-md-end gap-3 small mb-2">
+                            <a href="#!" class="footer-link">Manifesto</a>
+                            <a href="#!" class="footer-link">Architecture</a>
+                            <a href="#!" class="footer-link">Dispatches</a>
+                            <a href="#!" class="footer-link">Privacy</a>
+                        </div>
+                        <div class="small text-white-50">
+                            <span class="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 me-1">●</span>
+                            All Systems Operational &bull; Built for the Indie Revolution
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
+        <!-- Custom interactive scripts-->
         <script src="js/scripts.js"></script>
     </body>
 </html>
